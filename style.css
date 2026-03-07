@@ -82,33 +82,32 @@ p, li, label, div {
 }
 
 
-/* ── Hide Streamlit chrome ──────────────────────────────────────── */
+/* ── Streamlit chrome ───────────────────────────────────────────── */
+/* Don't fully hide stHeader — it owns the sidebar expand button.   */
+/* Instead blend it into the background and strip its decoration.   */
 [data-testid="stHeader"] {
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-  background: transparent !important;
-  border: none !important;
+  background-color: var(--bg-base) !important;
+  border-bottom: none !important;
   box-shadow: none !important;
 }
 
-/* Pin the collapsed-sidebar re-open button to the top-left corner   */
-/* so it floats above all page content and is always clickable.      */
-[data-testid="collapsedControl"] {
-  position: fixed !important;
-  top: 8px !important;
-  left: 8px !important;
-  z-index: 9999 !important;
-  background: var(--bg-sidebar) !important;
-  border-radius: var(--radius-sm) !important;
-  border: 1px solid var(--border) !important;
+/* Hide only the inner toolbar/hamburger, not the collapse control   */
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stHeader"] [data-testid="stToolbarActions"] {
+  display: none !important;
 }
 
-[data-testid="stToolbar"]    { display: none !important; }
-[data-testid="stDecoration"] { display: none !important; }
-footer                        { display: none !important; }
-#MainMenu                     { display: none !important; }
+/* Remove fixed positioning override — let Streamlit handle it      */
+[data-testid="collapsedControl"] {
+  position: unset !important;
+  z-index: unset !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+footer    { display: none !important; }
+#MainMenu { display: none !important; }
 
 
 /* ── App & page background ──────────────────────────────────────── */
