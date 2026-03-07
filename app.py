@@ -373,9 +373,18 @@ else:
 with chat_col:
     ws = _ws()
 
-    # Banner
+    # Full-bleed banner (rendered as raw HTML to break out of column width)
     if _BANNER.exists():
-        st.image(str(_BANNER), use_container_width=True)
+        import base64
+        _img_b64 = base64.b64encode(_BANNER.read_bytes()).decode()
+        _ext = _BANNER.suffix.lstrip(".")
+        _mime = "image/jpeg" if _ext in ("jpg", "jpeg") else f"image/{_ext}"
+        st.markdown(
+            f'<div class="ll-banner-wrap">'
+            f'<img src="data:{_mime};base64,{_img_b64}" alt="LogitLock Banner"/>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
 
     # Header
     st.markdown(

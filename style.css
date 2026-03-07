@@ -83,10 +83,16 @@ p, li, label, div {
 
 
 /* ── Streamlit chrome ───────────────────────────────────────────── */
+/* Shrink header to nothing — collapse button already disabled       */
 [data-testid="stHeader"] {
-  background-color: var(--bg-base) !important;
-  border-bottom: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
   box-shadow: none !important;
+  overflow: hidden !important;
+  background: transparent !important;
 }
 
 /* Hide toolbar, decoration, AND the sidebar collapse/expand button  */
@@ -267,20 +273,27 @@ footer    { display: none !important; }
    ══════════════════════════════════════════════════════════════════ */
 [data-testid="stMainBlockContainer"] {
   /* Width is set dynamically from app.py per-render */
+  padding-top: 0 !important;
 }
 
 
 /* ── Banner ──────────────────────────────────────────────────────── */
-[data-testid="stImage"] {
-  margin: 0 0 var(--sp2) !important;
-  border-radius: var(--radius-md) !important;
-  overflow: hidden !important;
+.ll-banner-wrap {
+  /* Break out of the content column into full viewport width        */
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1b1a19;   /* matches --bg-base exactly          */
+  line-height: 0;              /* kill gap below inline img          */
+  margin-bottom: var(--sp2);
 }
 
-[data-testid="stImage"] img {
-  display: block !important;
+.ll-banner-wrap img {
   width: 100% !important;
   height: auto !important;
+  display: block !important;
+  object-fit: cover !important;
 }
 
 
