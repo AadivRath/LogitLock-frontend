@@ -1,0 +1,599 @@
+/* ================================================================
+   LogitLock  –  Microsoft Fluent Design System (Dark)
+   Custom Streamlit overrides
+   ================================================================ */
+
+/* ── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg-base:        #1b1a19;
+  --bg-elevated:    #242321;
+  --bg-overlay:     #2e2d2c;
+  --bg-sidebar:     #201f1e;
+  --text-primary:   #faf9f8;
+  --text-secondary: #a19f9d;
+  --text-tertiary:  #797775;
+  --brand:          #0078d4;
+  --brand-hover:    #106ebe;
+  --brand-light:    #2b88d8;
+  --error:          #a4262c;
+  --error-light:    #f1707b;
+  --success:        #107c10;
+  --warning:        #ffb900;
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-hover:   rgba(255, 255, 255, 0.14);
+  --radius-sm:      6px;
+  --radius-md:      12px;
+  --radius-lg:      16px;
+  --sp1:            8px;
+  --sp2:            16px;
+  --sp3:            24px;
+  --sp4:            32px;
+  --sp8:            64px;
+  --font-ui:        "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono:      Consolas, "Courier New", monospace;
+  --shadow-sm:      0 1px 4px rgba(0, 0, 0, 0.35);
+  --shadow-md:      0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ── Global reset & typography ──────────────────────────────────── */
+html,
+body,
+[class*="css"] {
+  font-family: var(--font-ui) !important;
+  color: var(--text-primary) !important;
+}
+
+p, li, span, label, div {
+  font-family: var(--font-ui) !important;
+}
+
+
+/* ── Hide Streamlit chrome ──────────────────────────────────────── */
+[data-testid="stHeader"]     { display: none !important; }
+[data-testid="stToolbar"]    { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+footer                        { display: none !important; }
+#MainMenu                     { display: none !important; }
+
+
+/* ── App & page background ──────────────────────────────────────── */
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"] {
+  background-color: var(--bg-base) !important;
+}
+
+[data-testid="stAppViewContainer"] > section:first-child {
+  background-color: var(--bg-base) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SIDEBAR
+   ══════════════════════════════════════════════════════════════════ */
+[data-testid="stSidebar"] {
+  background-color: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+[data-testid="stSidebar"] > div:first-child {
+  padding: var(--sp3) var(--sp2) var(--sp4) !important;
+}
+
+/* Brand block */
+.ll-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: var(--sp2);
+}
+
+.ll-brand-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.ll-brand-name {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  color: var(--text-primary) !important;
+}
+
+.ll-brand-tag {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--brand-light) !important;
+  background: rgba(43, 136, 216, 0.15);
+  border: 1px solid rgba(43, 136, 216, 0.3);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* Divider */
+.ll-hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--sp2) 0;
+}
+
+/* Section label */
+.ll-section-label {
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  color: var(--text-tertiary) !important;
+  margin: var(--sp2) 0 6px !important;
+  padding: 0 !important;
+}
+
+/* Sidebar buttons – workspace items */
+[data-testid="stSidebar"] .stButton > button {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  padding: 7px var(--sp1) !important;
+  transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease !important;
+  width: 100% !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-testid="stSidebar"] .stButton > button:hover {
+  background: var(--bg-overlay) !important;
+  border-color: var(--border-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Active / primary workspace button */
+[data-testid="stSidebar"] .stButton > button[kind="primaryFormSubmit"],
+[data-testid="stSidebar"] .stButton > button[kind="primary"] {
+  background: var(--bg-overlay) !important;
+  border-color: var(--border-hover) !important;
+  color: var(--brand-light) !important;
+  font-weight: 500 !important;
+}
+
+/* New-chat button distinction */
+[data-testid="stSidebar"] [data-testid="btn_new"] > button,
+[data-testid="stSidebar"] button[kind="secondary"]:first-of-type {
+  border: 1px solid var(--border) !important;
+}
+
+/* Configuration section labels */
+.ll-config-label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary) !important;
+  margin: 10px 0 3px !important;
+  padding: 0 !important;
+}
+
+/* Expander */
+.streamlit-expanderHeader,
+[data-testid="stExpander"] summary {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: var(--sp1) 0 !important;
+}
+
+.streamlit-expanderHeader:hover,
+[data-testid="stExpander"] summary:hover {
+  color: var(--text-primary) !important;
+}
+
+.streamlit-expanderContent,
+[data-testid="stExpander"] > div:last-child {
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   MAIN CONTENT AREA
+   ══════════════════════════════════════════════════════════════════ */
+[data-testid="stMainBlockContainer"] {
+  /* Width is set dynamically from app.py per-render */
+}
+
+
+/* ── Chat header ────────────────────────────────────────────────── */
+.ll-chat-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--sp1) 0 var(--sp2);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--sp3);
+}
+
+.ll-chat-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+.ll-chat-date {
+  font-size: 11.5px !important;
+  font-weight: 300 !important;
+  color: var(--text-tertiary) !important;
+}
+
+
+/* ── Empty state ────────────────────────────────────────────────── */
+.ll-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--sp8) var(--sp4);
+  gap: var(--sp2);
+}
+
+.ll-empty-icon {
+  font-size: 52px;
+  margin-bottom: var(--sp1);
+  filter: grayscale(0.2);
+}
+
+.ll-empty-title {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+.ll-empty-sub {
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  color: var(--text-secondary) !important;
+  max-width: 28rem;
+  line-height: 1.65;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   CHAT MESSAGES
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Hide default avatars */
+[data-testid="chatAvatarIcon-user"],
+[data-testid="chatAvatarIcon-assistant"],
+.stChatMessageAvatarUser,
+.stChatMessageAvatarAssistant,
+[class*="chatAvatarIcon"],
+[class*="AvatarUser"],
+[class*="AvatarAssistant"] {
+  display: none !important;
+}
+
+/* Message container */
+[data-testid="stChatMessage"] {
+  border-radius: var(--radius-md) !important;
+  padding: var(--sp2) !important;
+  margin-bottom: var(--sp1) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--bg-elevated) !important;
+  box-shadow: var(--shadow-sm) !important;
+  /* Remove gap left by hidden avatar */
+  gap: 0 !important;
+}
+
+/* User messages – lighter tint + subtle left accent */
+[data-testid="stChatMessage"].stUser,
+.stChatMessage.stUser {
+  background: var(--bg-overlay) !important;
+  border-left: 2px solid var(--brand) !important;
+  margin-left: var(--sp8) !important;
+}
+
+/* Message text */
+[data-testid="stChatMessage"] p {
+  font-size: 14.5px !important;
+  line-height: 1.65 !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui) !important;
+}
+
+/* Timestamp */
+.ll-ts {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  font-family: var(--font-ui);
+}
+
+
+/* ── Similarity badge ───────────────────────────────────────────── */
+.ll-sim-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  margin-top: var(--sp1);
+  font-size: 11.5px;
+}
+
+.ll-sim-label {
+  color: var(--text-tertiary);
+  font-weight: 400;
+  font-family: var(--font-ui);
+}
+
+.ll-sim-val {
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+
+/* ── Threat card ────────────────────────────────────────────────── */
+.ll-threat-card {
+  background: rgba(164, 38, 44, 0.10);
+  border: 1px solid rgba(164, 38, 44, 0.35);
+  border-left: 3px solid var(--error);
+  border-radius: var(--radius-md);
+  padding: var(--sp2);
+  font-size: 13.5px;
+}
+
+.ll-threat-header {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--error-light) !important;
+  margin-bottom: 6px;
+  font-family: var(--font-ui) !important;
+}
+
+.ll-threat-body {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: var(--sp1);
+  font-family: var(--font-ui);
+}
+
+.ll-threat-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--sp1);
+  flex-wrap: wrap;
+}
+
+.ll-threat-tag {
+  background: rgba(164, 38, 44, 0.22);
+  border: 1px solid rgba(164, 38, 44, 0.45);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--error-light);
+  font-family: var(--font-mono);
+}
+
+.ll-threat-sim {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+
+/* ── Error card ─────────────────────────────────────────────────── */
+.ll-error-card {
+  background: rgba(164, 38, 44, 0.08);
+  border: 1px solid rgba(164, 38, 44, 0.28);
+  border-radius: var(--radius-sm);
+  padding: var(--sp1) var(--sp2);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--error-light);
+  font-family: var(--font-ui);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   CHAT INPUT
+   ══════════════════════════════════════════════════════════════════ */
+[data-testid="stChatInput"] {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+[data-testid="stChatInput"]:focus-within {
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.18) !important;
+}
+
+[data-testid="stChatInput"] textarea {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 14px !important;
+  caret-color: var(--text-primary) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+[data-testid="stChatInputSubmitButton"] button,
+[data-testid="stChatInput"] button {
+  color: var(--brand) !important;
+  transition: color 0.15s !important;
+}
+
+[data-testid="stChatInputSubmitButton"] button:hover,
+[data-testid="stChatInput"] button:hover {
+  color: var(--brand-hover) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ARTIFACTS PANEL
+   ══════════════════════════════════════════════════════════════════ */
+.ll-art-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp1);
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  padding: var(--sp1) 0 var(--sp2);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--sp2);
+  font-family: var(--font-ui) !important;
+}
+
+.ll-art-count {
+  background: var(--brand);
+  color: #fff !important;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+  background: transparent !important;
+  border-bottom: 1px solid var(--border) !important;
+  gap: 0 !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 8px 14px !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  transition: color 0.14s, border-color 0.14s !important;
+}
+
+.stTabs [aria-selected="true"] {
+  color: var(--brand-light) !important;
+  border-bottom-color: var(--brand-light) !important;
+}
+
+/* Code blocks */
+.stCode,
+[data-testid="stCode"] {
+  border-radius: var(--radius-md) !important;
+  overflow: hidden !important;
+}
+
+.stCode code,
+pre,
+code {
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   FORM WIDGETS
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Text areas */
+.stTextArea textarea {
+  background: var(--bg-overlay) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 13px !important;
+  resize: vertical;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+.stTextArea textarea:focus {
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.15) !important;
+}
+
+/* Sliders */
+[data-testid="stSlider"] [class*="track"] > div:first-child {
+  background: var(--brand) !important;
+}
+
+[data-testid="stSlider"] [class*="thumb"] {
+  border-color: var(--brand) !important;
+  background: var(--brand) !important;
+  box-shadow: none !important;
+}
+
+[data-testid="stSlider"] [class*="thumb"]:hover,
+[data-testid="stSlider"] [class*="thumb"]:focus {
+  box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.25) !important;
+}
+
+/* Number input */
+.stNumberInput input {
+  background: var(--bg-overlay) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  transition: border-color 0.15s !important;
+}
+
+.stNumberInput input:focus {
+  border-color: var(--brand) !important;
+}
+
+/* Select slider */
+[data-testid="stSelectSlider"] [data-baseweb="slider"] [class*="track"] > div:first-child {
+  background: var(--brand) !important;
+}
+
+/* Spinner */
+[data-testid="stSpinner"] > div,
+.stSpinner > div {
+  border-top-color: var(--brand) !important;
+}
+
+/* Scrollbar refinement */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
