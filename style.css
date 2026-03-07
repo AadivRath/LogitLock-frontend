@@ -83,27 +83,19 @@ p, li, label, div {
 
 
 /* ── Streamlit chrome ───────────────────────────────────────────── */
-/* Don't fully hide stHeader — it owns the sidebar expand button.   */
-/* Instead blend it into the background and strip its decoration.   */
 [data-testid="stHeader"] {
   background-color: var(--bg-base) !important;
   border-bottom: none !important;
   box-shadow: none !important;
 }
 
-/* Hide only the inner toolbar/hamburger, not the collapse control   */
+/* Hide toolbar, decoration, AND the sidebar collapse/expand button  */
 [data-testid="stToolbar"],
 [data-testid="stDecoration"],
-[data-testid="stHeader"] [data-testid="stToolbarActions"] {
-  display: none !important;
-}
-
-/* Remove fixed positioning override — let Streamlit handle it      */
+[data-testid="stToolbarActions"],
+[data-testid="stSidebarCollapseButton"],
 [data-testid="collapsedControl"] {
-  position: unset !important;
-  z-index: unset !important;
-  background: transparent !important;
-  border: none !important;
+  display: none !important;
 }
 
 footer    { display: none !important; }
