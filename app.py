@@ -86,8 +86,6 @@ def _init() -> None:
         st.session_state.show_artifacts = False
     if "config" not in st.session_state:
         st.session_state.config = {
-            "system_prompt": "You are a helpful AI assistant for an e-commerce company.",
-            "temperature": 0.70,
             "max_tokens": 1024,
             "sensitivity": "Medium",
         }
@@ -300,25 +298,6 @@ with st.sidebar:
 
     # ── Configuration Hub ───────────────────────────────────────────
     with st.expander("⚙️  Configuration", expanded=False):
-        sp = st.text_area(
-            "System Prompt",
-            value=st.session_state.config["system_prompt"],
-            height=88,
-            key="cfg_sp",
-        )
-        st.session_state.config["system_prompt"] = sp
-
-        tmp = st.slider(
-            "Temperature",
-            min_value=0.0,
-            max_value=2.0,
-            value=float(st.session_state.config["temperature"]),
-            step=0.05,
-            format="%.2f",
-            key="cfg_tmp",
-        )
-        st.session_state.config["temperature"] = tmp
-
         sens = st.select_slider(
             "Security Sensitivity",
             options=["Low", "Medium", "High"],
@@ -336,6 +315,13 @@ with st.sidebar:
             key="cfg_mxt",
         )
         st.session_state.config["max_tokens"] = int(mxt)
+
+        st.markdown(
+            '<p class="ll-config-note">'
+            "Model temperature and system prompt are managed by the LogitLock backend."
+            "</p>",
+            unsafe_allow_html=True,
+        )
 
     # ── Artifacts Toggle ────────────────────────────────────────────
     if _arts():

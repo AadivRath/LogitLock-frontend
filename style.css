@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 /* ================================================================
@@ -171,6 +172,16 @@ footer                        { display: none !important; }
 [data-testid="stSidebar"] [data-testid="btn_new"] > button,
 [data-testid="stSidebar"] button[kind="secondary"]:first-of-type {
   border: 1px solid var(--border) !important;
+}
+
+/* Configuration note */
+.ll-config-note {
+  font-size: 11px !important;
+  color: var(--text-tertiary) !important;
+  font-style: italic;
+  margin-top: 10px !important;
+  line-height: 1.5;
+  font-family: var(--font-ui) !important;
 }
 
 /* Configuration widget native labels */
