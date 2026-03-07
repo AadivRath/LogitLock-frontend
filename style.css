@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
 /* ================================================================
    LogitLock  –  Microsoft Fluent Design System (Dark)
    Custom Streamlit overrides
@@ -171,13 +173,17 @@ footer                        { display: none !important; }
   border: 1px solid var(--border) !important;
 }
 
-/* Configuration section labels */
-.ll-config-label {
+/* Configuration widget native labels */
+[data-testid="stSidebar"] .stTextArea > label,
+[data-testid="stSidebar"] .stSlider > label,
+[data-testid="stSidebar"] [data-testid="stSelectSlider"] > label,
+[data-testid="stSidebar"] .stNumberInput > label {
   font-size: 11px !important;
   font-weight: 600 !important;
   color: var(--text-secondary) !important;
-  margin: 10px 0 3px !important;
+  margin: 8px 0 2px !important;
   padding: 0 !important;
+  font-family: var(--font-ui) !important;
 }
 
 /* Expander */

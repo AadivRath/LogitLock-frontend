@@ -234,8 +234,9 @@ def _render_message(m: dict) -> None:
     role = m["role"]
     meta = m["meta"]
     ts = m.get("ts", "")
+    avatar = "🧑" if role == "user" else "🔒"
 
-    with st.chat_message(role):
+    with st.chat_message(role, avatar=avatar):
         if meta.get("error"):
             _render_error(meta["error"])
         elif meta.get("blocked"):
@@ -299,26 +300,16 @@ with st.sidebar:
 
     # ── Configuration Hub ───────────────────────────────────────────
     with st.expander("⚙️  Configuration", expanded=False):
-        st.markdown(
-            '<p class="ll-config-label">System Prompt</p>',
-            unsafe_allow_html=True,
-        )
         sp = st.text_area(
-            "sp",
-            label_visibility="collapsed",
+            "System Prompt",
             value=st.session_state.config["system_prompt"],
             height=88,
             key="cfg_sp",
         )
         st.session_state.config["system_prompt"] = sp
 
-        st.markdown(
-            '<p class="ll-config-label">Temperature</p>',
-            unsafe_allow_html=True,
-        )
         tmp = st.slider(
-            "tmp",
-            label_visibility="collapsed",
+            "Temperature",
             min_value=0.0,
             max_value=2.0,
             value=float(st.session_state.config["temperature"]),
@@ -328,26 +319,16 @@ with st.sidebar:
         )
         st.session_state.config["temperature"] = tmp
 
-        st.markdown(
-            '<p class="ll-config-label">Security Sensitivity</p>',
-            unsafe_allow_html=True,
-        )
         sens = st.select_slider(
-            "sens",
-            label_visibility="collapsed",
+            "Security Sensitivity",
             options=["Low", "Medium", "High"],
             value=st.session_state.config["sensitivity"],
             key="cfg_sens",
         )
         st.session_state.config["sensitivity"] = sens
 
-        st.markdown(
-            '<p class="ll-config-label">Max Tokens</p>',
-            unsafe_allow_html=True,
-        )
         mxt = st.number_input(
-            "mxt",
-            label_visibility="collapsed",
+            "Max Tokens",
             min_value=128,
             max_value=4096,
             value=int(st.session_state.config["max_tokens"]),
@@ -436,7 +417,7 @@ with chat_col:
 
         # Persist & immediately render the user message
         _push_msg("user", user_input)
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="🧑"):
             st.markdown(user_input)
             st.markdown(
                 f'<span class="ll-ts">{datetime.now().strftime("%H:%M")}</span>',
@@ -444,7 +425,7 @@ with chat_col:
             )
 
         # Call the API and render the assistant response
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar="🔒"):
             with st.spinner(""):
                 data = _call_api(user_input, hist)
 
