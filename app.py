@@ -39,6 +39,9 @@ def _inject_css() -> None:
 _inject_css()
 
 
+_BANNER = Path(__file__).parent / "logit_lock_darkmode_BANNER.jpg"
+
+
 # ═══════════════════════════════════════════════════════════════════
 # 3. CONSTANTS
 # ═══════════════════════════════════════════════════════════════════
@@ -369,6 +372,10 @@ else:
 # ═══════════════════════════════════════════════════════════════════
 with chat_col:
     ws = _ws()
+
+    # Banner
+    if _BANNER.exists():
+        st.image(str(_BANNER), use_container_width=True)
 
     # Header
     st.markdown(

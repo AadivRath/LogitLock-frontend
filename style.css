@@ -270,6 +270,20 @@ footer    { display: none !important; }
 }
 
 
+/* ── Banner ──────────────────────────────────────────────────────── */
+[data-testid="stImage"] {
+  margin: 0 0 var(--sp2) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden !important;
+}
+
+[data-testid="stImage"] img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+
 /* ── Chat header ────────────────────────────────────────────────── */
 .ll-chat-header {
   display: flex;
