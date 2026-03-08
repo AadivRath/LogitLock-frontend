@@ -11,6 +11,7 @@ from pathlib import Path
 
 import requests
 import streamlit as st
+import streamlit.components.v1 as components
 
 # ═══════════════════════════════════════════════════════════════════
 # 1. PAGE CONFIG   (must be the very first Streamlit call)
@@ -37,6 +38,38 @@ def _inject_css() -> None:
 
 
 _inject_css()
+
+# Inject a persistent floating sidebar toggle button via JS.
+# Uses window.parent.document to append a button outside React's tree
+# so it survives Streamlit reruns. Proxies the native toggle click.
+components.html(
+    """
+    <script>
+    (function(){
+      var ID='ll-sb-toggle';
+      function mk(d){
+        if(d.getElementById(ID))return;
+        var b=d.createElement('button');
+        b.id=ID;
+        b.title='Toggle sidebar';
+        b.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+        b.style.cssText='position:fixed;top:13px;left:13px;z-index:2147483647;width:34px;height:34px;background:#2e2d2c;border:1px solid rgba(255,255,255,0.09);border-radius:6px;color:#a19f9d;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
+        b.onmouseenter=function(){b.style.background='#242321';b.style.borderColor='rgba(255,255,255,0.18)';b.style.color='#faf9f8';};
+        b.onmouseleave=function(){b.style.background='#2e2d2c';b.style.borderColor='rgba(255,255,255,0.09)';b.style.color='#a19f9d';};
+        b.onclick=function(){
+          var t=d.querySelector('[data-testid="stSidebarCollapseButton"] button')||d.querySelector('[data-testid="collapsedControl"] button');
+          if(t)t.click();
+        };
+        d.body.appendChild(b);
+      }
+      function run(){try{mk(window.parent.document);}catch(e){}}
+      run();setTimeout(run,300);setTimeout(run,800);setTimeout(run,2000);
+    })();
+    </script>
+    """,
+    height=0,
+    scrolling=False,
+)
 
 
 _BANNER = Path(__file__).parent / "logit_lock_darkmode_BANNER.jpg"

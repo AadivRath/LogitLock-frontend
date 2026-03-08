@@ -68,56 +68,12 @@
 }
 
 
-/* ── Sidebar collapse/expand toggle buttons ──────────────────────
-   Nuclear approach: force both buttons to always be visible and
-   reachable. Don't touch the SVGs — let Streamlit render them.
-   Just style the wrapper and tint the icon color.
-   ─────────────────────────────────────────────────────────────────── */
-
-/* Force both wrappers visible regardless of any parent hiding */
+/* ── Sidebar toggle buttons — hidden; proxied by the JS hamburger button
+   injected via components.html() in app.py. JS click() works on hidden
+   elements so the proxy button can still trigger them. */
 [data-testid="stSidebarCollapseButton"],
 [data-testid="collapsedControl"] {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-/* Pin the expand button (shown when sidebar is collapsed) to the
-   top-left of the viewport so nothing can clip or bury it */
-[data-testid="collapsedControl"] {
-  position: fixed !important;
-  top: 14px !important;
-  left: 14px !important;
-  z-index: 99999 !important;
-}
-
-/* Style the button shell */
-[data-testid="stSidebarCollapseButton"] button,
-[data-testid="collapsedControl"] button {
-  background: var(--bg-overlay) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 5px 8px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: background 0.14s ease, border-color 0.14s ease !important;
-  cursor: pointer !important;
-}
-
-[data-testid="stSidebarCollapseButton"] button:hover,
-[data-testid="collapsedControl"] button:hover {
-  background: var(--bg-elevated) !important;
-  border-color: var(--border-hover) !important;
-}
-
-/* Tint Streamlit's native SVG to match our palette */
-[data-testid="stSidebarCollapseButton"] button svg,
-[data-testid="collapsedControl"] button svg {
-  color: var(--text-secondary) !important;
-  fill: var(--text-secondary) !important;
-  stroke: var(--text-secondary) !important;
+  display: none !important;
 }
 
 
@@ -135,11 +91,14 @@ p, li, label, div {
 
 
 /* ── Streamlit chrome ───────────────────────────────────────────── */
-/* Make the header invisible visually but preserve its layout height
-   so the stSidebarCollapseButton inside it is never clipped.
-   collapsedControl is pinned via position:fixed above, so it works
-   regardless of header dimensions. */
+/* Zero-height transparent strip — nothing useful lives here anymore
+   since toggle buttons are hidden and proxied by our JS button. */
 [data-testid="stHeader"] {
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
