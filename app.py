@@ -310,7 +310,7 @@ def _render_message(m: dict) -> None:
     role = m["role"]
     meta = m["meta"]
     ts = m.get("ts", "")
-    avatar = " "
+    avatar = "user" if role == "user" else "assistant"
 
     with st.chat_message(role, avatar=avatar):
         if meta.get("error"):
@@ -494,7 +494,7 @@ with chat_col:
 
         # Persist & immediately render the user message
         _push_msg("user", user_input)
-        with st.chat_message("user", avatar=" "):
+        with st.chat_message("user", avatar="user"):
             st.markdown(user_input)
             st.markdown(
                 f'<span class="ll-ts">{datetime.now().strftime("%H:%M")}</span>',
@@ -502,7 +502,7 @@ with chat_col:
             )
 
         # Call the API and render the assistant response
-        with st.chat_message("assistant", avatar=" "):
+        with st.chat_message("assistant", avatar="assistant"):
             with st.spinner(""):
                 data = _call_api(user_input, hist)
 
