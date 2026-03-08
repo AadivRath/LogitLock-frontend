@@ -17,7 +17,7 @@ import streamlit as st
 # ═══════════════════════════════════════════════════════════════════
 st.set_page_config(
     page_title="LogitLock",
-    page_icon="🔒",
+    page_icon="🔐",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={"Get Help": None, "Report a bug": None, "About": None},
@@ -49,6 +49,81 @@ _API_URL = (
     "https://logitlock-cng6e9h4crb0c8fs.centralindia-01.azurewebsites.net/chat"
 )
 _API_TIMEOUT = 30  # seconds
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 3b. SVG ICON SYSTEM  (inline, stroke-based, zero dependency)
+# ═══════════════════════════════════════════════════════════════════
+def _icon(name: str, size: int = 18, cls: str = "ll-icon") -> str:
+    """Return an inline SVG string for the given icon name."""
+    _base = (
+        f'<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 24 24" '
+        f'fill="none" stroke="currentColor" stroke-width="1.6" '
+        f'stroke-linecap="round" stroke-linejoin="round" '
+        f'xmlns="http://www.w3.org/2000/svg">'
+        "{paths}"
+        "</svg>"
+    )
+    _paths: dict[str, str] = {
+        # Shield with lock keyhole — brand / sidebar logo
+        "shield_lock": (
+            '<path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6l-8-4z"/>'
+            '<circle cx="12" cy="11" r="2"/>'
+            '<line x1="12" y1="13" x2="12" y2="16"/>'
+        ),
+        # Plus — new chat
+        "plus": (
+            '<line x1="12" y1="5" x2="12" y2="19"/>'
+            '<line x1="5" y1="12" x2="19" y2="12"/>'
+        ),
+        # Sliders — configuration
+        "sliders": (
+            '<line x1="4" y1="21" x2="4" y2="14"/>'
+            '<line x1="4" y1="10" x2="4" y2="3"/>'
+            '<line x1="12" y1="21" x2="12" y2="12"/>'
+            '<line x1="12" y1="8" x2="12" y2="3"/>'
+            '<line x1="20" y1="21" x2="20" y2="16"/>'
+            '<line x1="20" y1="12" x2="20" y2="3"/>'
+            '<line x1="1" y1="14" x2="7" y2="14"/>'
+            '<line x1="9" y1="8" x2="15" y2="8"/>'
+            '<line x1="17" y1="16" x2="23" y2="16"/>'
+        ),
+        # File with code brackets — artifacts
+        "file_code": (
+            '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>'
+            '<polyline points="14 2 14 8 20 8"/>'
+            '<polyline points="10 13 8 15 10 17"/>'
+            '<polyline points="14 13 16 15 14 17"/>'
+        ),
+        # X — close/hide
+        "close": (
+            '<line x1="18" y1="6" x2="6" y2="18"/>'
+            '<line x1="6" y1="6" x2="18" y2="18"/>'
+        ),
+        # Shield with alert exclamation — threat blocked
+        "shield_alert": (
+            '<path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6l-8-4z"/>'
+            '<line x1="12" y1="8" x2="12" y2="12"/>'
+            '<line x1="12" y1="16" x2="12.01" y2="16"/>'
+        ),
+        # Triangle with exclamation — error
+        "alert_triangle": (
+            '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>'
+            '<line x1="12" y1="9" x2="12" y2="13"/>'
+            '<line x1="12" y1="17" x2="12.01" y2="17"/>'
+        ),
+        # Lock open — empty state hero (larger, 48px)
+        "lock_open": (
+            '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>'
+            '<path d="M7 11V7a5 5 0 0 1 9.9-1"/>'
+        ),
+        # Chat bubble — conversations label
+        "message_square": (
+            '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
+        ),
+    }
+    paths = _paths.get(name, "")
+    return _base.format(paths=paths)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -209,7 +284,7 @@ def _render_blocked(threat: str | None, score: float) -> None:
     label = threat or "Suspicious Activity"
     st.markdown(
         f'<div class="ll-threat-card">'
-        f'  <div class="ll-threat-header">🛡️&nbsp; Message Blocked</div>'
+        f'  <div class="ll-threat-header">{_icon("shield_alert", 15, "ll-icon-sm")} Message Blocked</div>'
         f'  <div class="ll-threat-body">'
         f"    This message was flagged by the LogitLock AI security firewall "
         f"    and was not forwarded to the assistant."
@@ -225,7 +300,7 @@ def _render_blocked(threat: str | None, score: float) -> None:
 
 def _render_error(msg: str) -> None:
     st.markdown(
-        f'<div class="ll-error-card">⚠️&nbsp; {msg}</div>',
+        f'<div class="ll-error-card">{_icon("alert_triangle", 15, "ll-icon-sm")} {msg}</div>',
         unsafe_allow_html=True,
     )
 
@@ -235,7 +310,7 @@ def _render_message(m: dict) -> None:
     role = m["role"]
     meta = m["meta"]
     ts = m.get("ts", "")
-    avatar = "🧑" if role == "user" else "🔒"
+    avatar = " "
 
     with st.chat_message(role, avatar=avatar):
         if meta.get("error"):
@@ -261,7 +336,7 @@ with st.sidebar:
     # ── Brand ──────────────────────────────────────────────────────
     st.markdown(
         '<div class="ll-brand">'
-        '  <span class="ll-brand-icon">🔒</span>'
+        f'  <span class="ll-brand-icon">{_icon("shield_lock", 20)}</span>'
         '  <span class="ll-brand-name">LogitLock</span>'
         '  <span class="ll-brand-tag">AI Firewall</span>'
         "</div>",
@@ -270,7 +345,7 @@ with st.sidebar:
     st.markdown('<hr class="ll-hr"/>', unsafe_allow_html=True)
 
     # ── New Chat ────────────────────────────────────────────────────
-    if st.button("＋  New Chat", key="btn_new", use_container_width=True):
+    if st.button("New Chat", key="btn_new", use_container_width=True):
         wid = _uid()
         st.session_state.workspaces[wid] = _blank_workspace()
         st.session_state.active_ws = wid
@@ -279,7 +354,8 @@ with st.sidebar:
 
     # ── Workspace List ──────────────────────────────────────────────
     st.markdown(
-        '<p class="ll-section-label">Conversations</p>', unsafe_allow_html=True
+        f'<p class="ll-section-label">{_icon("message_square", 12, "ll-icon-xs")} Conversations</p>',
+        unsafe_allow_html=True,
     )
 
     for wid, wdata in reversed(list(st.session_state.workspaces.items())):
@@ -300,7 +376,7 @@ with st.sidebar:
     st.markdown('<hr class="ll-hr"/>', unsafe_allow_html=True)
 
     # ── Configuration Hub ───────────────────────────────────────────
-    with st.expander("⚙️  Configuration", expanded=False):
+    with st.expander("Configuration", expanded=False):
         sens = st.select_slider(
             "Security Sensitivity",
             options=["Low", "Medium", "High"],
@@ -330,10 +406,9 @@ with st.sidebar:
     if _arts():
         st.markdown('<hr class="ll-hr"/>', unsafe_allow_html=True)
         n = len(_arts())
-        icon = "✕" if st.session_state.show_artifacts else "📄"
         verb = "Hide" if st.session_state.show_artifacts else "View"
         if st.button(
-            f"{icon}  {verb} Artifacts ({n})",
+            f"{verb} Artifacts ({n})",
             key="btn_art",
             use_container_width=True,
         ):
@@ -399,7 +474,7 @@ with chat_col:
     if not _msgs():
         st.markdown(
             '<div class="ll-empty">'
-            '  <div class="ll-empty-icon">🔒</div>'
+            f'  <div class="ll-empty-icon">{_icon("shield_lock", 48, "ll-icon-hero")}</div>'
             '  <div class="ll-empty-title">LogitLock AI Firewall</div>'
             '  <div class="ll-empty-sub">'
             "    Every message is screened against known threat patterns "
@@ -419,7 +494,7 @@ with chat_col:
 
         # Persist & immediately render the user message
         _push_msg("user", user_input)
-        with st.chat_message("user", avatar="🧑"):
+        with st.chat_message("user", avatar=" "):
             st.markdown(user_input)
             st.markdown(
                 f'<span class="ll-ts">{datetime.now().strftime("%H:%M")}</span>',
@@ -427,7 +502,7 @@ with chat_col:
             )
 
         # Call the API and render the assistant response
-        with st.chat_message("assistant", avatar="🔒"):
+        with st.chat_message("assistant", avatar=" "):
             with st.spinner(""):
                 data = _call_api(user_input, hist)
 
