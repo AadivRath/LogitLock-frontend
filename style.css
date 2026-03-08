@@ -20,7 +20,7 @@
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .ll-icon-hero {
@@ -131,16 +131,16 @@ p, li, label, div {
 
 
 /* ── Streamlit chrome ───────────────────────────────────────────── */
-/* Shrink header to nothing — collapse button already disabled       */
+/* Keep the header as a transparent, zero-visual container but do NOT
+   set height:0 or overflow:hidden — doing so clips the collapsedControl
+   button that Streamlit renders inside the header when the sidebar is
+   collapsed. */
 [data-testid="stHeader"] {
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  overflow: hidden !important;
-  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* Hide toolbar, decoration strip, and actions button */
@@ -374,6 +374,19 @@ footer    { display: none !important; }
   pointer-events: none;
 }
 
+/* Gradient fade at the top edge — blends in from page background */
+.ll-banner-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 18%;
+  background: linear-gradient(to bottom, var(--bg-base) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 
 /* ── Chat header ────────────────────────────────────────────────── */
 .ll-chat-header {
@@ -454,8 +467,7 @@ footer    { display: none !important; }
   border: 1px solid var(--border) !important;
   background: var(--bg-elevated) !important;
   box-shadow: var(--shadow-sm) !important;
-  /* Remove gap left by hidden avatar */
-  gap: 0 !important;
+  gap: 12px !important;
 }
 
 /* User messages – lighter tint + subtle left accent */
