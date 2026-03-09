@@ -427,6 +427,17 @@ footer    { display: none !important; }
   font-style: normal;
 }
 
+.ll-demo-wrap {
+  margin-top: var(--sp3);
+  text-align: center;
+}
+
+.ll-demo-label {
+  font-size: 13px !important;
+  color: var(--text-tertiary) !important;
+  margin-bottom: var(--sp1) !important;
+}
+
 
 /* ══════════════════════════════════════════════════════════════════
    CHAT MESSAGES
