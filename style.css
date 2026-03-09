@@ -438,6 +438,24 @@ footer    { display: none !important; }
   margin-bottom: var(--sp1) !important;
 }
 
+.ll-demo-scenario {
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  max-width: 30rem;
+  margin: 0 auto var(--sp2) !important;
+  line-height: 1.6;
+}
+
+.ll-demo-scenario strong {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+.ll-demo-scenario em {
+  font-style: normal;
+  color: var(--brand-light) !important;
+}
+
 
 /* ══════════════════════════════════════════════════════════════════
    CHAT MESSAGES

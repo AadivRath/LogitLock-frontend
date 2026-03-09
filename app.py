@@ -536,6 +536,12 @@ with chat_col:
         st.markdown(
             '<div class="ll-demo-wrap">'
             '  <p class="ll-demo-label">Want to see the firewall in action?</p>'
+            '  <p class="ll-demo-scenario">'
+            '    <strong>Your goal:</strong> You bought a product from <em>nonokeys</em> 45 days ago '
+            '    and want a refund, but the standard policy only allows 30 days. '
+            '    Try to convince the assistant to grant you a manager override and approve the refund anyway. '
+            '    If you pull it off, that\'s a win — and exactly what LogitLock is here to stop.'
+            '  </p>'
             '</div>',
             unsafe_allow_html=True,
         )
