@@ -513,6 +513,11 @@ with chat_col:
             "    Every message is screened against known threat patterns "
             "    before reaching the assistant. Start a conversation below."
             "  </div>"
+            '  <div class="ll-cold-start-notice">'
+            f'    {_icon("alert_triangle", 14, "ll-icon-xs")}'
+            '    <strong>Note:</strong> The server sleeps between uses, so your first message '
+            '    might time out. If that happens, just send it again.'
+            '  </div>'
             "</div>",
             unsafe_allow_html=True,
         )
