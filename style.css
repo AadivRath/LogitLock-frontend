@@ -457,15 +457,15 @@ footer    { display: none !important; }
 }
 
 /* ── Demo attack button — amber/orange to stand out ─────────────── */
-[data-testid="stMarkdownContainer"]:has(.ll-demo-wrap) ~ [data-testid="stButton"] button,
-[data-testid="stMarkdownContainer"]:has(.ll-demo-wrap) ~ [data-testid="stBaseButton-secondary"] {
+.ll-demo-btn-anchor ~ [data-testid="stButton"] button,
+.ll-demo-btn-anchor ~ div [data-testid="stBaseButton-secondary"] {
   background: rgba(210, 83, 0, 0.15) !important;
   border-color: rgba(210, 83, 0, 0.55) !important;
   color: #f4a460 !important;
 }
 
-[data-testid="stMarkdownContainer"]:has(.ll-demo-wrap) ~ [data-testid="stButton"] button:hover,
-[data-testid="stMarkdownContainer"]:has(.ll-demo-wrap) ~ [data-testid="stBaseButton-secondary"]:hover {
+.ll-demo-btn-anchor ~ [data-testid="stButton"] button:hover,
+.ll-demo-btn-anchor ~ div [data-testid="stBaseButton-secondary"]:hover {
   background: rgba(210, 83, 0, 0.28) !important;
   border-color: rgba(210, 83, 0, 0.80) !important;
   color: #ffb07a !important;

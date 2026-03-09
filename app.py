@@ -545,6 +545,7 @@ with chat_col:
             '</div>',
             unsafe_allow_html=True,
         )
+        st.markdown('<div class="ll-demo-btn-anchor"></div>', unsafe_allow_html=True)
         if st.button(
             "Fire a demo adversarial attack",
             key="btn_demo",
