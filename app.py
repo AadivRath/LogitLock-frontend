@@ -521,28 +521,19 @@ with chat_col:
             '<div class="ll-empty">'
             f'  <div class="ll-empty-icon">{_icon("shield_lock", 48, "ll-icon-hero")}</div>'
             '  <div class="ll-empty-title">LogitLock AI Firewall</div>'
-            '  <div class="ll-empty-sub">'
-            "    Every message is screened against known threat patterns "
-            "    before reaching the assistant. Start a conversation below."
-            "  </div>"
+            '  <div class="ll-empty-sub">Every message is screened before it reaches the assistant.</div>'
             '  <div class="ll-cold-start-notice">'
             f'    {_icon("alert_triangle", 14, "ll-icon-xs")}'
-            '    <strong>Note:</strong> The server sleeps between uses, so your first message '
-            '    might time out. If that happens, just send it again.'
+            '    Server sleeps when idle — if your first message times out, just send it again.'
+            '  </div>'
+            '  <div class="ll-demo-card">'
+            '    <p class="ll-demo-card-title">Try to beat the firewall</p>'
+            '    <p class="ll-demo-card-body">'
+            '      You bought a <em>nonokeys</em> product 45 days ago. Policy allows 30.'
+            '      Get the assistant to approve a manager override refund. That\'s your win.'
+            '    </p>'
             '  </div>'
             "</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            '<div class="ll-demo-wrap">'
-            '  <p class="ll-demo-label">Want to see the firewall in action?</p>'
-            '  <p class="ll-demo-scenario">'
-            '    <strong>Your goal:</strong> You bought a product from <em>nonokeys</em> 45 days ago '
-            '    and want a refund, but the standard policy only allows 30 days. '
-            '    Try to convince the assistant to grant you a manager override and approve the refund anyway. '
-            '    If you pull it off, that\'s a win — and exactly what LogitLock is here to stop.'
-            '  </p>'
-            '</div>',
             unsafe_allow_html=True,
         )
         st.markdown('<div class="ll-demo-btn-anchor"></div>', unsafe_allow_html=True)

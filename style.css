@@ -427,31 +427,31 @@ footer    { display: none !important; }
   font-style: normal;
 }
 
-.ll-demo-wrap {
+.ll-demo-card {
   margin-top: var(--sp3);
-  text-align: center;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-overlay);
+  max-width: 26rem;
+  text-align: left;
 }
 
-.ll-demo-label {
+.ll-demo-card-title {
   font-size: 13px !important;
-  color: var(--text-tertiary) !important;
-  margin-bottom: var(--sp1) !important;
-}
-
-.ll-demo-scenario {
-  font-size: 13px !important;
-  color: var(--text-secondary) !important;
-  max-width: 30rem;
-  margin: 0 auto var(--sp2) !important;
-  line-height: 1.6;
-}
-
-.ll-demo-scenario strong {
+  font-weight: 600 !important;
   color: var(--text-primary) !important;
-  font-weight: 600;
+  margin: 0 0 4px !important;
 }
 
-.ll-demo-scenario em {
+.ll-demo-card-body {
+  font-size: 12.5px !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.55;
+  margin: 0 !important;
+}
+
+.ll-demo-card-body em {
   font-style: normal;
   color: var(--brand-light) !important;
 }
