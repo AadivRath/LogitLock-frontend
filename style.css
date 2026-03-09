@@ -427,31 +427,31 @@ footer    { display: none !important; }
   font-style: normal;
 }
 
-.ll-demo-card {
+.ll-demo-wrap {
   margin-top: var(--sp3);
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: var(--bg-overlay);
-  max-width: 26rem;
-  text-align: left;
+  text-align: center;
 }
 
-.ll-demo-card-title {
+.ll-demo-label {
   font-size: 13px !important;
-  font-weight: 600 !important;
-  color: var(--text-primary) !important;
-  margin: 0 0 4px !important;
+  color: var(--text-tertiary) !important;
+  margin-bottom: var(--sp1) !important;
 }
 
-.ll-demo-card-body {
-  font-size: 12.5px !important;
+.ll-demo-scenario {
+  font-size: 13px !important;
   color: var(--text-secondary) !important;
-  line-height: 1.55;
-  margin: 0 !important;
+  max-width: 30rem;
+  margin: 0 auto var(--sp2) !important;
+  line-height: 1.6;
 }
 
-.ll-demo-card-body em {
+.ll-demo-scenario strong {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+.ll-demo-scenario em {
   font-style: normal;
   color: var(--brand-light) !important;
 }
